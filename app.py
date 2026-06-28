@@ -239,8 +239,9 @@ with tab2:
 
     # Confusion matrices side by side
     with c2:
-        model_sel = st.radio("Confusion Matrix for:", ["XGBoost","KNN"], horizontal=True)
-        cm_data = metrics[model_sel.lower()]["cm"]
+        model_sel = st.radio("Confusion Matrix for:", ["XGBoost","KNN"], horizontal=True, key="cm_radio")
+        cm_key = "xgb" if model_sel == "XGBoost" else "knn"
+        cm_data = metrics[cm_key]["cm"]
         cm = np.array(cm_data)
         fig = px.imshow(cm, text_auto=True, color_continuous_scale='Reds',
                         labels=dict(x="Predicted", y="Actual"),
