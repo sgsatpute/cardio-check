@@ -163,9 +163,9 @@ with tab1:
                 proba  = knn_model.predict_proba(scaled)[0]
                 mname  = "KNN"
 
-            conf = round(proba[int(pred)] * 100, 1)
-            low_p  = round(proba[0] * 100, 1)
-            high_p = round(proba[1] * 100, 1)
+            conf   = f"{proba[int(pred)] * 100:.1f}"
+            low_p  = round(float(proba[0]) * 100, 1)
+            high_p = round(float(proba[1]) * 100, 1)
 
             if pred == 1:
                 st.markdown(f"""
