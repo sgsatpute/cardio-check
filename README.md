@@ -2,10 +2,11 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Deployed-FF4B4B?logo=streamlit&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-98.4%25_Accuracy-brightgreen?logo=xgboost)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-KNN-F7931E?logo=scikit-learn&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-A clinical-grade machine learning web application that predicts heart disease risk from patient vitals and diagnostic indicators. Built with Streamlit and a K-Nearest Neighbours classifier, CardioCheck delivers instant risk assessments through a clean, intuitive interface.
+A clinical-grade machine learning web application that predicts heart disease risk from patient vitals and diagnostic indicators. Built with Streamlit, the app features two trained classifiers (XGBoost and KNN), interactive EDA visualisations, and a real-time probability gauge.
 
 🌐 **Live Demo:** [cardiocheck-saurav.streamlit.app](https://cardiocheck-saurav.streamlit.app)
 
@@ -13,30 +14,31 @@ A clinical-grade machine learning web application that predicts heart disease ri
 
 ## 📌 Overview
 
-Cardiovascular disease is the leading cause of death globally. CardioCheck leverages a trained KNN model to assess a patient's likelihood of heart disease based on 11 clinical features — providing a fast, accessible screening tool for educational and research purposes.
+Cardiovascular disease is the leading cause of death globally. CardioCheck leverages two ML models trained on 918 patient records to assess heart disease risk based on 11 clinical features — providing a fast, accessible screening tool for educational and research purposes.
 
 ---
 
 ## 🖼️ Features
 
+- **Dual Model Support** — switch between XGBoost (98.4% accuracy) and KNN (85.9% accuracy)
 - **Instant Risk Assessment** — predicts High or Low risk in real time
-- **Confidence Score** — displays model prediction confidence (%)
+- **Probability Gauge** — live speedometer showing exact risk percentage
+- **Model Performance Tab** — accuracy, F1 score, confusion matrix, and model comparison chart
+- **EDA Tab** — 4 interactive charts exploring feature distributions and correlations
 - **Clean UI** — inputs grouped into Demographics, Vitals, and Clinical Indicators
 - **Human-readable Labels** — chest pain types and ECG readings shown with full descriptions
 - **Medical Disclaimer** — clearly scoped as an educational tool
-- **Mobile Responsive** — works across devices
 
 ---
 
 ## 🧠 Model Details
 
-| Property | Value |
-|---|---|
-| Algorithm | K-Nearest Neighbours (KNN) |
-| Preprocessing | StandardScaler |
-| Input Features | 11 clinical features |
-| Output | Binary — High Risk / Low Risk |
-| Training Data | UCI Heart Failure dataset |
+| Property | XGBoost | KNN |
+|---|---|---|
+| Accuracy | 98.4% | 85.9% |
+| F1 Score | 98.7% | 89.2% |
+| Preprocessing | None (tree-based) | StandardScaler |
+| Hyperparameters | n_estimators=100, max_depth=4, lr=0.1 | n_neighbors=11 |
 
 ### Input Features
 
@@ -56,14 +58,26 @@ Cardiovascular disease is the leading cause of death globally. CardioCheck lever
 
 ---
 
+## 📊 App Tabs
+
+| Tab | Contents |
+|---|---|
+| 🔍 Risk Assessment | Input form, model selector, result banner, probability gauge |
+| 📊 Model Performance | Accuracy/F1 metrics, bar chart comparison, confusion matrix |
+| 📈 EDA | Age distribution, chest pain breakdown, MaxHR vs Age scatter, correlation heatmap |
+
+---
+
 ## 📦 Project Structure
 
 ```
 cardio-check/
 ├── app.py                  # Main Streamlit application
-├── knn_heart_model.pkl     # Serialised KNN classifier
-├── heart_scaler.pkl        # Fitted StandardScaler
+├── knn_heart_model.pkl     # Trained KNN classifier
+├── xgb_heart_model.pkl     # Trained XGBoost classifier
+├── heart_scaler.pkl        # Fitted StandardScaler (for KNN)
 ├── heart_columns.pkl       # Expected feature column order
+├── model_metrics.json      # Accuracy, F1, confusion matrices
 ├── requirements.txt        # Python dependencies
 ├── .streamlit/
 │   └── config.toml         # Theme and server configuration
